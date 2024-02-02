@@ -4,10 +4,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Flyer Generator</title>
 </head>
 
 <body>
+<!-- HTML Structure -->
+<div id="templateContainer">
+   <!-- Your template content with placeholders -->
+   <h2 id="headline">Headline</h2>
+   <p id="date">Date: </p>
+   <!-- Other dynamic content -->
+</div>
+
+<!-- User Input Form -->
+<form id="userInputForm">
+   <label for="headlineInput">Headline:</label>
+   <input type="text" id="headlineInput" oninput="updateTemplateLive()">
+
+   <label for="dateInput">Date:</label>
+   <input type="text" id="dateInput" oninput="updateTemplateLive()">
+   <!-- Add more input fields as needed -->
+
+   <button type="button" onclick="updateAndDuplicateTemplate()">Update & Duplicate Template</button>
+   <button type="button" onclick="downloadImage()">Download Image</button>
+</form>
+
+<!-- Container for duplicated template -->
+<div id="duplicatedTemplateContainer"></div>
+
+<!-- JavaScript -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+   function updateTemplateLive() {
+      // Get user input
+      const headline = document.getElementById('headlineInput').value;
+      const date = document.getElementById('dateInput').value;
+
+      // Update template content in real-time
+      document.getElementById('headline').innerText = headline;
+      document.getElementById('date').innerText = `Date: ${date}`;
+      // Update other dynamic content as needed
+   }
+
+   function updateAndDuplicateTemplate() {
+      // Get user input
+      const headline = document.getElementById('headlineInput').value;
+      const date = document.getElementById('dateInput').value;
+
+      // Clone the template
+      const templateContainer = document.getElementById('templateContainer');
+      const clonedTemplate = templateContainer.cloneNode(true);
+
+      // Update cloned template content
+      clonedTemplate.querySelector('#headline').innerText = headline;
+      clonedTemplate.querySelector('#date').innerText = `Date: ${date}`;
+      // Update other dynamic content as needed
+
+      // Append cloned template to new container
+      const duplicatedTemplateContainer = document.getElementById('duplicatedTemplateContainer');
+      duplicatedTemplateContainer.innerHTML = '';
+      duplicatedTemplateContainer.appendChild(clonedTemplate);
+   }
+
+   function downloadImage() {
+      // Use html2canvas to generate image from the duplicated template
+      html2canvas(document.getElementById('duplicatedTemplateContainer')).then(canvas => {
+         // Convert canvas to data URL
+         const dataURL = canvas.toDataURL('image/jpeg');
+
+         // Create a link element
+         const a = document.createElement('a');
+         a.href = dataURL;
+         a.download = 'template_image.jpg';
+         
+         // Trigger a click on the link to initiate the download
+         document.body.appendChild(a);
+         a.click();
+         document.body.removeChild(a);
+      });
+   }
+</script>
+
 
 </body>
 
