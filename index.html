@@ -1,33 +1,156 @@
+
 <!DOCTYPE html>
-<html>
-
-<head>
+<html lang="en">
+<head id="head-section">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flyer Generator</title>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Dynamic Usrah Flyer Generator</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"
+        integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+<link rel="stylesheet" href="https://adenaikeidris.com.ng/assets/css/style.css">
+ <link rel="icon" type="image/png" href="#">
 
+<!-- Your existing HTML content -->
+
+<script src="script.js"></script>
+
+</head>
+<style>
+  .leading-0{
+    line-height: 0.85;
+  }
+  .border-lime{
+    border-color: #90FF27;
+  }
+  .text-lime{
+    color: #90FF27;
+  }
+   .text-shadow{
+    text-shadow: 5px .4px gray;
+    color: #90FF27;
+  }
+</style>
 <body>
+  <main class="bg-gray-100 h-screen flex items-center justify-center">
+  
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-10">
+    <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
+    <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Name of Lecturer:</label>
+     <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+ <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
+ <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+ 
+ <div class="flex justify-between align-center ">
+ 
+    <button id="updateAndDuplicateTemplate()"  class="mt-4 bg-diamond-2 text-white px-4 py-2 rounded-md text-sm">Duplicate</button>
+  <button type="button" class="mt-4 bg-transparent text-white px-4 py-2 rounded-md text-sm self-center" onclick="downloadImage()">Download Image</button>
+  </div>
+   </div>
+  </main>
 <!-- HTML Structure -->
-<div id="templateContainer">
+<div id="templateContainer" style="width:120%">
    <!-- Your template content with placeholders -->
-   <h2 id="headline">Headline</h2>
-   <p id="date">Date: </p>
+   <!--<h2 id="topic">Topic</h2>
+   <h2 id="lecturer">Lecturer</h2>
+   <p id="dateGre">Date: </p>-->
+   <!--<p id="dateIsl">Date: </p>-->
    <!-- Other dynamic content -->
+   <div>
+     
+   
+   <div class="">
+     <div class="flex flex-col gap-1 justify-between">
+       <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-10">
+       <img src="./mssnlogo.png" alt="" class="w-full h-full rounded-full p-2">
+       </div>
+       <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
+     </div>
+     <div class="flex flex-col gap-1 justify-between text-center">
+       <span class="font-light text-gray-700 capitalize mt-5">Presents</span>
+       <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black">WEEKLY <br>USRAH</h1>
+     </div>
+     <div class="bg-green-800 p-2 flex gap-2 rounded-b-md w-3/4 mx-auto text-white font-bold">
+       <span class="self-center bg-red-500 p-1 rounded-sm">
+         Topic:
+       </span>
+      <span class="block text-1eft self-center leading-tight" id="topic"></span>
+     </div>
+   </div>
+   <div class="mt-2 border-t-4 border-lime bg-green-800 px-10 py-5 w-full grid grid-cols-2 gap-2">
+     <!--<div class="flex justify-between align-center w-full gap-2">-->
+       <div class="flex flex-col align-center">
+         <span class="text-lime leading-0 font-bold">Lecturer:</span>
+         <span class="text-white leading-tight" id="lecturer"></span>
+       </div>
+       
+       <div class="">
+         <span class="text-lime leading-0 font-bold">Date:</span>
+       <!--  <span class="text-white leading-tight">Thursday, 1st February, 2024</span>-->
+                  <span class="text-white leading-tight" id="dateGre"></span>
+
+       </div>
+     <!--</div>-->
+    <!-- <div class="mt-2 flex justify-between align-center w-full gap-2">-->
+       <div class="mt-5">
+         <span class="text-lime leading-0 font-bold">Time:</span>
+         <span class="text-white leading-tight">04:30 pm - 6:30 pm</span>
+       </div>
+       
+       <div class="mt-5">
+         <span class="text-lime leading-0 font-bold">Venue:</span>
+         <span class="text-white leading-tight">Sagamu Central Mosque, Falawo</span>
+       </div>
+    <!-- </div>-->
+
+   </div>
+   <div class="flex mx-auto justify-center gap-3 px-10 py-5 bg-white align-center text-green-800 text-sm">
+     <div class="flex gap-1 align-center">
+       <div>
+         <i class="fab fa-instagram"></i>
+         <i class="fab fa-facebook"></i>
+         <i class="fab fa-twitter"></i>
+       </div>
+       
+      <p class="self-center">mssnremoareacouncil</p>
+     </div>
+      <div class="flex align-center gap-1">
+        <div>
+        <i class="fab fa-whatsapp"></i>
+        </div>
+        <p class="self-center">+234 708 050 8894</p>
+      </div>
+   </div>
+     
+   </div>
 </div>
 
 <!-- User Input Form -->
-<form id="userInputForm">
-   <label for="headlineInput">Headline:</label>
-   <input type="text" id="headlineInput" oninput="updateTemplateLive()">
-
-   <label for="dateInput">Date:</label>
-   <input type="text" id="dateInput" oninput="updateTemplateLive()">
+<!-- User Input Form -->
+<!--<form id="userInputForm">
+   <label for="topicInput">Topic:</label>
+   <input type="text" id="topicInput" oninput="updateTemplateLive()">
+   
+   <label for="lecturerInput">Lecturer:</label>
+   <input type="text" id="lecturerInput" oninput="updateTemplateLive()">
+   
+   <label for="dateGreInput">Date:</label>
+   <input type="date" id="dateGreInput" oninput="updateTemplateLive()">-->
+   
+  <!-- <label for="dateIslInput">Date:</label>
+   <input type="date" id="dateIslInput" oninput="updateTemplateLive()">-->
    <!-- Add more input fields as needed -->
 
-   <button type="button" onclick="updateAndDuplicateTemplate()">Update & Duplicate Template</button>
+  <!-- <button type="button" onclick="updateAndDuplicateTemplate()">Update & Duplicate Template</button>
    <button type="button" onclick="downloadImage()">Download Image</button>
-</form>
+</form>-->
 
 <!-- Container for duplicated template -->
 <div id="duplicatedTemplateContainer"></div>
@@ -37,27 +160,35 @@
 <script>
    function updateTemplateLive() {
       // Get user input
-      const headline = document.getElementById('headlineInput').value;
-      const date = document.getElementById('dateInput').value;
+      const topic = document.getElementById('topicInput').value;
+      const lecturer = document.getElementById('lecturerInput').value;
+      const dateGre = document.getElementById('dateGreInput').value;
+    //  const dateIsl = document.getElementById('dateIslInput').value;
 
       // Update template content in real-time
-      document.getElementById('headline').innerText = headline;
-      document.getElementById('date').innerText = `Date: ${date}`;
+      document.getElementById('topic').innerText = topic;
+      document.getElementById('lecturer').innerText = lecturer;
+      document.getElementById('dateGre').innerText = dateGre;
+    //  document.getElementById('dateIsl').innerText = `Date: ${dateIsl}`;
       // Update other dynamic content as needed
    }
 
    function updateAndDuplicateTemplate() {
       // Get user input
-      const headline = document.getElementById('headlineInput').value;
-      const date = document.getElementById('dateInput').value;
+      const topic = document.getElementById('topicInput').value;
+      const dateGre = document.getElementById('dateGreInput').value;
+      const lecturer = document.getElementById('lecturerInput').value;
+     // const dateIsl = document.getElementById('dateIslInput').value;
 
       // Clone the template
       const templateContainer = document.getElementById('templateContainer');
       const clonedTemplate = templateContainer.cloneNode(true);
 
       // Update cloned template content
-      clonedTemplate.querySelector('#headline').innerText = headline;
-      clonedTemplate.querySelector('#date').innerText = `Date: ${date}`;
+      clonedTemplate.querySelector('#topic').innerText = topic;
+      clonedTemplate.querySelector('#lecturer').innerText = lecturer;
+      clonedTemplate.querySelector('#dateGre').innerText = dateGre;
+     // clonedTemplate.querySelector('#dateIsl').innerText = `Date: ${dateIsl}`;
       // Update other dynamic content as needed
 
       // Append cloned template to new container
@@ -84,6 +215,7 @@
       });
    }
 </script>
+
 
 
 </body>
