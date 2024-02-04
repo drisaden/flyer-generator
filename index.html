@@ -15,9 +15,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
 <link rel="stylesheet" href="https://adenaikeidris.com.ng/assets/css/style.css">
- <link rel="icon" type="image/png" href="#">
-
-<!-- Your existing HTML content -->
+ <link rel="icon" type="image/png" href="./mssn-logo.png">
 
 <script src="script.js"></script>
 
@@ -36,38 +34,46 @@
     text-shadow: 5px .4px gray;
     color: #90FF27;
   }
+  .z-9999{
+    z-index: 9999;
+  }
+  .z-10{
+    z-index: -10;
+  }
 </style>
-<body>
 
-  <!--<main class="bg-gray-100 h-screen flex items-center justify-center">
+<body>
+    <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
   
-    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-10">
-    <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
-    <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
+        
+      <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
+    <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
      <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Name of Lecturer:</label>
-     <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+     <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
  <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
- <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplateLive()">
+ <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
  
  <div class="flex justify-between align-center ">
  
-    <button id="updateAndDuplicateTemplate()"  class="mt-4 bg-diamond-2 text-white px-4 py-2 rounded-md text-sm">Duplicate</button>
-  <button type="button" class="mt-4 link-btn mb-10 focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-sm tx-mont self-center" onclick="downloadImage()">Download Image</button>
+    <button id="preview"  class="mt-4 bg-diamond-2 text-white px-4 py-2 rounded-md text-sm">Preview</button>
+      
+    </div>
   </div>
-   </div>
-  </main>-->
-<!-- HTML Structure -->
-<div id="templateContainer" style="width:120%">
-   <!-- Your template content with placeholders -->
-   <!--<h2 id="topic">Topic</h2>
-   <h2 id="lecturer">Lecturer</h2>
-   <p id="dateGre">Date: </p>-->
-   <!--<p id="dateIsl">Date: </p>-->
-   <!-- Other dynamic content -->
-   <div>
+  </main>
+ 
+  
+  <div id="temCon" class="hidden">
+  <div id="templateContainer" style="width:120%" class="relative">
+     <div>
      
    
-   <div class="">
+   <!--<div class="bg-contain bg-center bg-no-repeat" style="background: url('./bg.jpg');">-->
+     <div class="h-full relative">
+       
+  
+     <img src="./bg.jpg" alt="" class="absolute h-full bg-white w-full bg-gradient-to-t from-white to-transparent z-10">
+     
      <div class="flex flex-col gap-1 justify-between">
        <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-10">
        <img src="./mssn-logo.png" alt="" class="w-full h-full rounded-full p-2">
@@ -84,6 +90,8 @@
        </span>
       <span class="block text-1eft self-center leading-tight" id="topic"></span>
      </div>
+       
+     
    </div>
    <div class="mt-2 border-t-4 border-lime bg-green-800 px-10 py-5 w-full grid grid-cols-2 gap-2">
      <!--<div class="flex justify-between align-center w-full gap-2">-->
@@ -92,7 +100,7 @@
          <span class="text-white leading-tight" id="lecturer"></span>
        </div>
        
-       <div class="">
+       <div class="flex flex-col align-center">
          <span class="text-lime leading-0 font-bold">Date:</span>
        <!--  <span class="text-white leading-tight">Thursday, 1st February, 2024</span>-->
                   <span class="text-white leading-tight" id="dateGre"></span>
@@ -100,12 +108,12 @@
        </div>
      <!--</div>-->
     <!-- <div class="mt-2 flex justify-between align-center w-full gap-2">-->
-       <div class="mt-5">
+       <div class="mt-5 flex flex-col align-center">
          <span class="text-lime leading-0 font-bold">Time:</span>
          <span class="text-white leading-tight">04:30 pm - 6:30 pm</span>
        </div>
        
-       <div class="mt-5">
+       <div class="mt-5 flex flex-col align-center">
          <span class="text-lime leading-0 font-bold">Venue:</span>
          <span class="text-white leading-tight">Sagamu Central Mosque, Falawo</span>
        </div>
@@ -131,16 +139,26 @@
    </div>
      
    </div>
-</div>
+    
+   </div>
+   <div class="flex justify-evenly align-center mt-10 items-center w-full">
+     
+     <div>
+       
+    
+   <button type="button" class="bg-diamond-2 text-white px-4 py-2 rounded-md text-xl" id="downloadFlyer">Download Flyer</button>
+   </div>
+   <div class="self-center">
+    <button type="button" class="link-btn focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-xl tx-mont self-center" id="update">Edit</button>
+  </div>
+
+  </div>
+  
+  </body>
 
 
-<!-- Container for duplicated template -->
-<div id="duplicatedTemplateContainer"></div>
-
-<!-- JavaScript -->
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-   function updateTemplateLive() {
+  function updateTemplate() {
       // Get user input
       const topic = document.getElementById('topicInput').value;
       const lecturer = document.getElementById('lecturerInput').value;
@@ -154,52 +172,64 @@
     //  document.getElementById('dateIsl').innerText = `Date: ${dateIsl}`;
       // Update other dynamic content as needed
    }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("modal");
+  const temCon = document.getElementById("temCon");
+    const updateModal = document.getElementById("update");
 
-   function updateAndDuplicateTemplate() {
-      // Get user input
-      const topic = document.getElementById('topicInput').value;
-      const dateGre = document.getElementById('dateGreInput').value;
-      const lecturer = document.getElementById('lecturerInput').value;
-     // const dateIsl = document.getElementById('dateIslInput').value;
+  const previewBtn = document.getElementById("preview");
+  const downloadBtn = document.getElementById("downloadFlyer");
 
-      // Clone the template
-      const templateContainer = document.getElementById('templateContainer');
-      const clonedTemplate = templateContainer.cloneNode(true);
+  function updateTemplateLive() {
+    topicContainer.innerText = topicInput.value;
+    lecturerContainer.innerText = lecturerInput.value;
+    dateGreContainer.innerText = "Date: " + dateGreInput.value;
+  }
 
-      // Update cloned template content
-      clonedTemplate.querySelector('#topic').innerText = topic;
-      clonedTemplate.querySelector('#lecturer').innerText = lecturer;
-      clonedTemplate.querySelector('#dateGre').innerText = dateGre;
-     // clonedTemplate.querySelector('#dateIsl').innerText = `Date: ${dateIsl}`;
-      // Update other dynamic content as needed
+  function showTemCon() {
+    const modal = document.getElementById("modal");
+  const temCon = document.getElementById("temCon");
+  modal.style.display = "none";
+  temCon.style.display = "block";
+  temCon.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  }
+  
+  function hideTemCon() {
 
-      // Append cloned template to new container
-      const duplicatedTemplateContainer = document.getElementById('duplicatedTemplateContainer');
-      duplicatedTemplateContainer.innerHTML = '';
-      duplicatedTemplateContainer.appendChild(clonedTemplate);
-   }
+  modal.style.marginTop ="50%"
+  modal.style.display = "block";
+  temCon.style.display = "none";
+  temCon.classList.add("hidden");
+  document.body.style.overflow = "";
+  }
+  
+  
+  
 
-   function downloadImage() {
-      // Use html2canvas to generate image from the duplicated template
-      html2canvas(document.getElementById('duplicatedTemplateContainer')).then(canvas => {
-         // Convert canvas to data URL
-         const dataURL = canvas.toDataURL('image/jpeg');
+  function downloadFlyer() {
+    html2canvas(document.getElementById("templateContainer")).then(function (
+      canvas
+    ) {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL();
+      link.download = "flyer.png";
+      link.click();
+    });
+  }
 
-         // Create a link element
-         const a = document.createElement('a');
-         a.href = dataURL;
-         a.download = 'template_image.jpg';
-         
-         // Trigger a click on the link to initiate the download
-         document.body.appendChild(a);
-         a.click();
-         document.body.removeChild(a);
-      });
-   }
+  previewBtn.addEventListener("click", function () {
+    showTemCon();
+  });
+
+  downloadBtn.addEventListener("click", function () {
+    downloadFlyer();
+  });
+
+  updateModal.addEventListener("click", ()=> hideTemCon());
+});
+
 </script>
-
-
-
-</body>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </html>
