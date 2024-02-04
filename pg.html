@@ -42,10 +42,15 @@
 </style>
 
 <body>
-<!--  <main id="modal" class="bg-gray-100 flex items-center justify-center flex flex-col absolute z-9999 px-6 overflow-hidden" style="width:100vw; height: 100vh;">-->
+<!--  <main id="modal" class="bg-gray-100 flex items-center justify-center flex flex-col absolute z-9999 px-6 overflow-hidden" style="width:100vw; height: 100vh;">
     <main id="modal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center flex-col bg-gray-100">
  
-      <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-10">
+      <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-10">-->
+      
+
+      <!--  <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
+  
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
       <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
     <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
@@ -60,9 +65,28 @@
       
     </div>
   </div>
+  </main>-->
+ 
+ 
+  <main class="bg-gray-100 h-screen flex items-center justify-center">
+  
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-10">
+    
+<label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
+    <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
+     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Name of Lecturer:</label>
+     <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
+ <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
+ <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
+ 
+ <div class="flex justify-between align-center ">
+ 
+    <button id="preview"  class="mt-4 bg-diamond-2 text-white px-4 py-2 rounded-md text-sm">Preview</button>
+     </div>
+   </div>
   </main>
   
-  <div id="temCon">
+  <div id="temCon" class="hidden">
   <div id="templateContainer" style="width:120%">
      <div>
      
@@ -136,8 +160,9 @@
    <div class="flex justify-between align-center">
      
    <button type="button" class="mt-4 bg-diamond-2 text-white px-4 py-2 rounded-md text-sm" id="downloadFlyer">Download Flyer</button>
-    <button type="button" class="mt-4 link-btn mb-10 focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-sm tx-mont self-center" id="update" onclick="update()">Update</button>
+    <button type="button" class="mt-4 link-btn mb-10 focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-sm tx-mont self-center" id="update">Update</button>
   </div>
+
   </div>
   
   </body>
@@ -182,8 +207,9 @@
   }
 
   function showTemCon() {
-    temCon.style.display = "block";
-    modal.style.display = "none";
+    temCon.classList.remove('hidden');
+   // temCon.style.display = "block";
+    modal.classList.add('hidden');
     document.body.style.overflow = "hidden";
   }
   
