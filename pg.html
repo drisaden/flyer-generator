@@ -189,14 +189,8 @@
   const temCon = document.getElementById("temCon");
     const updateModal = document.getElementById("update");
 
-  /*const topicInput = document.getElementById("topicInput");
-  const lecturerInput = document.getElementById("lecturerInput");
-  const dateGreInput = document.getElementById("dateGreInput");*/
   const previewBtn = document.getElementById("preview");
   const downloadBtn = document.getElementById("downloadFlyer");
-  /*const topicContainer = document.getElementById("topic");
-  const lecturerContainer = document.getElementById("lecturer");
-  const dateGreContainer = document.getElementById("dateGre");*/
 
   function updateTemplateLive() {
     topicContainer.innerText = topicInput.value;
@@ -214,13 +208,12 @@
   }
   
   function hideTemCon() {
+
+  modal.style.marginTop ="50%"
   modal.style.display = "block";
-  //modal.classList.add("bg-gray-100", "h-screen", "flex", "items-center", "justify-center");
   temCon.style.display = "none";
   temCon.classList.add("hidden");
-   // temCon.style.display = "none";
-    //modal.style.display = "block";
-  //  document.body.style.overflow = "";
+  document.body.style.overflow = "";
   }
   
   
