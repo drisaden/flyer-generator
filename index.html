@@ -157,19 +157,24 @@
 
 <script>
   function updateTemplate() {
-      // Get user input
-      const topic = document.getElementById('topicInput').value;
-      const lecturer = document.getElementById('lecturerInput').value;
-      const dateGre = document.getElementById('dateGreInput').value;
-    //  const dateIsl = document.getElementById('dateIslInput').value;
+  // Get user input
+  const topic = document.getElementById('topicInput').value;
+  const lecturer = document.getElementById('lecturerInput').value;
+  const dateGre = document.getElementById('dateGreInput').value;
 
-      // Update template content in real-time
-      document.getElementById('topic').innerText = topic;
-      document.getElementById('lecturer').innerText = lecturer;
-      document.getElementById('dateGre').innerText = dateGre;
-    //  document.getElementById('dateIsl').innerText = `Date: ${dateIsl}`;
-      // Update other dynamic content as needed
-   }
+  // Update template content in real-time
+  document.getElementById('topic').innerText = topic;
+  document.getElementById('lecturer').innerText = lecturer;
+  document.getElementById('dateGre').innerText = formatDate(dateGre);
+  // Update other dynamic content as needed
+}
+
+function formatDate(selectedDate) {
+  const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+  const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', options);
+  return formattedDate;
+}
+   
   
   document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("modal");
