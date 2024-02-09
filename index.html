@@ -155,7 +155,51 @@
   </div>
   
   </body>
+<script>
+  
+  function convertToHijri(gregorianDate) {
+  // Define the start date of the conversion in the Gregorian calendar
+  const startDate = new Date('2024-02-10');
+  // Hijri start date for calculation, beginning from Rajab since February 10, 2024, is 28 Rajab 1445
+  let hijriDay = 28;
+  let hijriMonthIndex = 7; // Rajab, considering 0 index based (Rajab is the 7th month in the given sequence starting from Muharram)
+  let hijriYear = 1445;
 
+  // Hijri months and their days, starting from Muharram
+  const hijriMonths = [
+    'Muharram', 'Safar', 'Rabi-ul-Awwal', 'Rabi-ul-Aakhir', 'Jumadal-uula', 'Jumadal-aakhirah',
+    'Rajab', 'Sha\'ban', 'Ramadan', 'Shawwal', 'Dhul-Qa\'dah', 'Dhul-hijjah'
+  ];
+  const hijriMonthDays = [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29];
+
+  // Calculate the difference in days between the given Gregorian date and the start date
+  const differenceInDays = Math.floor((gregorianDate - startDate) / (1000 * 60 * 60 * 24));
+
+  let totalDays = hijriDay + differenceInDays;
+
+  // Loop through each month to find the equivalent Hijri date
+  while (totalDays > hijriMonthDays[hijriMonthIndex]) {
+    totalDays -= hijriMonthDays[hijriMonthIndex];
+    hijriMonthIndex++;
+    // Adjust month index and increment year if needed
+    if (hijriMonthIndex > 11) {
+      hijriMonthIndex = 0; // Reset to Muharram
+      hijriYear++;
+    }
+  }
+
+  hijriDay = totalDays; // The remaining days give us the Hijri day
+
+  const hijriMonth = hijriMonths[hijriMonthIndex];
+
+  return `${hijriDay} ${hijriMonth}, ${hijriYear} A.H`;
+}
+
+// Example usage:
+const gregorianDate = new Date('2024-02-29'); // Convert February 29, 2024, to Hijri
+console.log(convertToHijri(gregorianDate)); // Should output the Hijri equivalent
+
+</script>
 
 <script>
   function updateTemplate() {
