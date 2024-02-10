@@ -152,7 +152,7 @@
     <button type="button" class="link-btn focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-xl tx-mont self-center" id="update">Edit</button>
   </div>
 
-  </div>
+</div>
   
   </body>
 <script>
@@ -194,6 +194,18 @@
 
   return `${hijriDay} ${hijriMonth}, ${hijriYear} A.H`;
 }
+  document.addEventListener('DOMContentLoaded', function() {
+  const dateInput = document.getElementById('dateInput');
+  const hijriDateDisplay = document.getElementById('hijriDateDisplay');
+
+  dateInput.addEventListener('change', function() {
+    const selectedDate = new Date(this.value);
+    const hijriDate = convertToHijri(selectedDate);
+    hijriDateDisplay.textContent = `Hijri Date: ${hijriDate}`;
+  });
+});
+
+
 
 // Example usage:
 const gregorianDate = new Date('2024-02-29'); // Convert February 29, 2024, to Hijri

@@ -43,7 +43,8 @@
 </style>
 
 <body>
-    <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
+
+    <main id="modal" class="hidden fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
   
     <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
@@ -158,7 +159,52 @@
 
 
 <script>
-  function updateTemplate() {
+
+function gregorianToHijri(gregorianYear, gregorianMonth, gregorianDay) {
+    gregorianMonth += 1; // Adjust months so February is the last one
+    if (gregorianMonth < 3) {
+        gregorianYear -= 1;
+        gregorianMonth += 12;
+    }
+
+    let a = Math.floor(gregorianYear / 100);
+    let b = Math.floor(a / 4);
+    let c = 2 - a + b;
+    let e = Math.floor(365.25 * (gregorianYear + 4716));
+    let f = Math.floor(30.6001 * (gregorianMonth + 1));
+    let julianDay = c + gregorianDay + e + f - 1524.5;
+
+    let n = Math.floor((julianDay - 227015.1) / 354.367);
+    let islamicYear = n + 622;
+    let r = julianDay - (354.367 * n + 227015.1);
+    let islamicMonth = Math.floor((r + 0.5) / 29.531);
+    let islamicDay = Math.floor(r - 29.531 * islamicMonth + 0.5);
+
+    if (islamicDay === 0) {
+        islamicDay = 30;
+        islamicMonth -= 1;
+    }
+    if (islamicMonth === 0) {
+        islamicMonth = 12;
+        islamicYear -= 1;
+    }
+
+    // Format day and month for display
+    let formattedDay = islamicDay.toString().padStart(2, '0');
+    let formattedMonth = islamicMonth.toString().padStart(2, '0');
+
+    return { year: islamicYear, month: formattedMonth, day: formattedDay };
+}
+
+document.getElementById('dateInput').addEventListener('change', function() {
+    let selectedDate = new Date(this.value);
+    let hijriDate = gregorianToHijri(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
+
+    // Displaying the converted Hijri date in Day-Month-Year format
+    document.getElementById('hijriDateDisplay').innerText = `Hijri Date: ${hijriDate.day}-${hijriDate.month}-${hijriDate.year}`;
+});
+
+ /* function updateTemplate() {
       // Get user input
       const topic = document.getElementById('topicInput').value;
       const lecturer = document.getElementById('lecturerInput').value;
@@ -228,7 +274,7 @@
   });
 
   updateModal.addEventListener("click", ()=> hideTemCon());
-});
+});*/
 
 </script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
