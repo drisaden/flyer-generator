@@ -158,49 +158,16 @@
 </div>
   
   </body>
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function() {
-    const dateInput = document.getElementById('dateGreInput');
-    
-    // Set the minimum date to today
-    const today = new Date();
-    const minDate = formatDate(today);
-    dateInput.setAttribute('min', minDate);
-    
-    // Listener for date input changes
-    dateInput.addEventListener('change', function() {
-        const selectedDate = new Date(this.value);
-        
-        // Check if the selected date is a Thursday (getDay() returns 4 for Thursday)
-        if (selectedDate.getDay() !== 4) {
-            alert("Please select a Thursday.");
-            this.value = ''; // Reset the input
-        }
-    });
-});
-
-// Helper function to format date as YYYY-MM-DD
-/*function formatDate(date) {
-    const d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
-}*/
-
-
-document.addEventListener("DOMContentLoaded", function () {
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modal");
     const temCon = document.getElementById("temCon");
     const updateModal = document.getElementById("update");
-
     const previewBtn = document.getElementById("preview");
     const downloadBtn = document.getElementById("downloadFlyer");
 
-    // Set the minimum date to today and enforce Thursday selection
+    // Setting up date input with Flatpickr
     setMinDateAndRestrictToThursdays();
 
     function showTemCon() {
@@ -211,20 +178,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function hideTemCon() {
-        modal.style.marginTop = "50%";
         modal.style.display = "block";
         temCon.style.display = "none";
         temCon.classList.add("hidden");
         document.body.style.overflow = "";
-    }
-
-    function downloadFlyer() {
-        html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
-            const link = document.createElement("a");
-            link.href = canvas.toDataURL();
-            link.download = "flyer.png";
-            link.click();
-        });
     }
 
     previewBtn.addEventListener("click", function () {
@@ -232,124 +189,101 @@ document.addEventListener("DOMContentLoaded", function () {
         updateTemplate();
     });
 
-    downloadBtn.addEventListener("click", function () {
-        downloadFlyer();
-    });
-
-    updateModal.addEventListener("click", function () {
-        hideTemCon();
-        updateTemplate();
-    });
+    downloadBtn.addEventListener("click", downloadFlyer);
+    updateModal.addEventListener("click", hideTemCon);
 
     document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
 });
 
-/*document.addEventListener("DOMContentLoaded", function() {
-    setMinDateAndRestrictToThursdays();
-});*/
-
 function setMinDateAndRestrictToThursdays() {
-    const today = new Date();
-    let nextThursday = new Date();
-    if (today.getDay() !== 4) {
-        // Calculate next Thursday
-        nextThursday.setDate(today.getDate() + ((4 + 7 - today.getDay()) % 7));
-    }
-
     flatpickr("#dateGreInput", {
-        minDate: nextThursday,
-        enable: [
-            function(date) {
-                // Enable only Thursdays
-                return date.getDay() === 4;
-            }
-        ],
+        minDate: "today",
         dateFormat: "Y-m-d",
-        onChange: [function(selectedDates, dateStr, instance) {
-            convertToHijriAndDisplay();
-        }]
+        enable: [function(date) { return date.getDay() === 4; }],
+        onChange: [convertToHijriAndDisplay]
     });
 }
 
 function updateTemplate() {
-    const topic = document.getElementById('topicInput').value;
-    const lecturer = document.getElementById('lecturerInput').value;
-    const dateGre = document.getElementById('dateGreInput').value;
-    
-    // Update template content in real-time
-    document.getElementById('topic').innerText = topic;
-    document.getElementById('lecturer').innerText = lecturer;
-    document.getElementById('dateGre').innerText = formatDate(dateGre);
-    
-    convertToHijriAndDisplay();
+    document.getElementById('topic').innerText = document.getElementById('topicInput').value;
+    document.getElementById('lecturer').innerText = document.getElementById('lecturerInput').value;
+    document.getElementById('dateGre').innerText = formatDate(document.getElementById('dateGreInput').value);
 }
 
 function convertToHijriAndDisplay() {
-    const dateGre = document.getElementById('dateGreInput').value;
-    if (dateGre) {
-        // Assuming the input format is YYYY-MM-DD, convert it to DD-MM-YYYY
-        const formattedDate = formatDateForAPI(dateGre);
-        fetchHijriDate(formattedDate, function(hijriDateString) {
+    const date = document.getElementById('dateGreInput').value;
+    if (date) {
+        fetchHijriDate(date, function(hijriDateString) {
             document.getElementById('dateIsl').innerText = hijriDateString;
         });
     }
 }
 
-function formatDateForAPI(inputDate) {
-    // Convert date from YYYY-MM-DD to DD-MM-YYYY for the API request
+function fetchHijriDate(inputDate, callback) {
     const [year, month, day] = inputDate.split('-');
-    return `${day}-${month}-${year}`;
-}
+    const formattedDate = `${day}-${month}-${year}`;
 
-function fetchHijriDate(date, callback) {
-    const url = `https://api.aladhan.com/v1/gToH/${date}`;
-
-    fetch(url)
+    fetch(`https://api.aladhan.com/v1/gToH/${formattedDate}`)
     .then(response => response.json())
     .then(data => {
         if (data.data && data.data.hijri) {
             const hijri = data.data.hijri;
-            // Format the day with the appropriate suffix
-            const dayWithSuffix = formatDayWithSuffix(hijri.day);
-            const hijriDateString = `${dayWithSuffix} ${hijri.month.en} ${hijri.year}AH`;
-            callback(hijriDateString);
+            callback(`${formatDayWithSuffix(hijri.day)} ${hijri.month.en} ${hijri.year}AH`);
         }
     })
-    .catch(error => {
-        console.error('Error fetching Hijri date:', error);
-    });
+    .catch(error => console.error('Error fetching Hijri date:', error));
 }
 
 function formatDayWithSuffix(day) {
-    const lastDigit = day % 10;
-    let suffix = 'th';
+    // Remove leading zeros by converting to integer then back to string
+    day = parseInt(day, 10).toString();
+    const lastDigit = parseInt(day.slice(-1), 10);
+    const exceptions = [11, 12, 13];
+    const dayInt = parseInt(day, 10);
 
-    // Adjusting for special cases
-    if (day !== 11 && day !== 12 && day !== 13) {
+    // Check if the day is an exception; if not, determine the correct suffix
+    let suffix;
+    if (exceptions.includes(dayInt)) {
+        suffix = 'th';
+    } else {
         switch (lastDigit) {
             case 1: suffix = 'st'; break;
             case 2: suffix = 'nd'; break;
             case 3: suffix = 'rd'; break;
+            default: suffix = 'th';
         }
     }
 
-    return `${day}${suffix}`;
+    return day + suffix;
 }
 
-function formatDate(selectedDate) {
-  const date = new Date(selectedDate);
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
     const options = { weekday: 'long', month: 'long', year: 'numeric' };
-    // Extracting parts of the date
     const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
     const month = date.toLocaleDateString('en-US', { month: 'long' });
     const year = date.getFullYear();
+    // Apply formatDayWithSuffix for the day part
     const dayWithSuffix = formatDayWithSuffix(date.getDate());
 
-    // Constructing the formatted date string
+    // Constructing the formatted date string with the updated day part
     const formattedDate = `${weekday}, ${month} ${dayWithSuffix}, ${year}`;
     return formattedDate;
 }
 
-</script>
+function downloadFlyer() {
+    html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "flyer.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+
+  </script>
+
+<!--<script src="./script.js"></script>-->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </html>
