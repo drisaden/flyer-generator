@@ -115,30 +115,10 @@ function formatDate(dateStr) {
 }
 
 function downloadFlyer() {
-    // Ensure images are loaded
-    document.images.forEach(function(img) {
-        img.onload = function() {
-            renderFlyer();
-        };
-    });
-
-    // You might need to explicitly wait for all images to load here
-    renderFlyer();
-}
-
-function renderFlyer() {
-    html2canvas(document.getElementById("templateContainer"), {
-        scale: 1, // Adjust scale as needed
-        logging: true,
-        useCORS: true, // For external images
-        windowWidth: document.getElementById("templateContainer").scrollWidth,
-        windowHeight: document.getElementById("templateContainer").scrollHeight,
-        x: 0,
-        y: window.pageYOffset // Adjust if the container is partially off-screen
-    }).then(function (canvas) {
+    html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
         const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "flyer.png";
+        link.href = canvas.toDataURL("image/svg");
+        link.download = "flyer.svg";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
