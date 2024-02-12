@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function hideTemCon() {
+      modal.style.marginTop ="50%";
         modal.style.display = "block";
         temCon.style.display = "none";
         temCon.classList.add("hidden");
