@@ -51,7 +51,14 @@
         
       <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
     <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
-     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Name of Lecturer:</label>
+     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Lecturer Details:</label>
+    <select class="ml-3 w-20 tx-2xl border-0 focus:outline-none focus:ring-0" name="" id="titleSelect" class="">
+                <option value="Mr." class="pl-2"><span class="mx-3 block"></span>Mr.</span></option>
+                 <option value="Dr." class="pl-2"><span class="mx-3 block"></span>Dr.</span></option>
+                  <option value="Mallam" class="pl-2"><span class="mx-3 block"></span>Mallam</span></option>
+                   <option value="Ustaadh" class="pl-2"><span class="mx-3 block"></span>Ustaadh</span></option>
+                    <option value="Alh." class="pl-2"><span class="mx-3 block"></span>Alh.</span></option>
+  </select>
      <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
  <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
  <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
@@ -154,6 +161,7 @@
   </div>
 
 </div>
+  </div>
   
   </body>
   

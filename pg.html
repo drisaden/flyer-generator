@@ -13,11 +13,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"
         integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hijri-date@1.0.1/dist/hijri-date.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
 <link rel="stylesheet" href="https://adenaikeidris.com.ng/assets/css/style.css">
  <link rel="icon" type="image/png" href="./mssn-logo.png">
 
-<script src="script.js"></script>
+<!--<script src="script.js"></script>-->
 
 </head>
 <style>
@@ -44,13 +48,20 @@
 
 <body>
 
-    <main id="modal" class="hidden fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
+     <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
   
     <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
       <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
     <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
-     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Name of Lecturer:</label>
+     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Lecturer Details:</label>
+    <select class="ml-3 w-20 tx-2xl border-0 focus:outline-none focus:ring-0" name="" id="titleSelect" class="">
+                <option value="Mr." class="pl-2"><span class="mx-3 block"></span>Mr.</span></option>
+                 <option value="Dr." class="pl-2"><span class="mx-3 block"></span>Dr.</span></option>
+                  <option value="Mallam" class="pl-2"><span class="mx-3 block"></span>Mallam</span></option>
+                   <option value="Ustaadh" class="pl-2"><span class="mx-3 block"></span>Ustaadh</span></option>
+                    <option value="Alh." class="pl-2"><span class="mx-3 block"></span>Alh.</span></option>
+  </select>
      <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
  <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
  <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
@@ -76,14 +87,14 @@
      <img src="./bg.jpg" alt="" class="absolute h-full bg-white w-full bg-gradient-to-t from-white to-transparent z-10">
      
      <div class="flex flex-col gap-1 justify-between">
-       <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-10">
+       <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-5">
        <img src="./mssn-logo.png" alt="" class="w-full h-full rounded-full p-2">
        </div>
        <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
      </div>
      <div class="flex flex-col gap-1 justify-between text-center">
        <span class="font-light text-gray-700 capitalize mt-5">Presents</span>
-       <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black">WEEKLY <br>USRAH</h1>
+       <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black" style="line-height: 0.85;">WEEKLY <br>USRAH</h1>
      </div>
      <div class="bg-green-800 p-2 flex gap-2 rounded-b-md w-3/4 mx-auto text-white font-bold">
        <span class="self-center bg-red-500 p-1 rounded-sm">
@@ -91,31 +102,30 @@
        </span>
       <span class="block text-1eft self-center leading-tight" id="topic"></span>
      </div>
-       
-     
    </div>
    <div class="mt-2 border-t-4 border-lime bg-green-800 px-10 py-5 w-full grid grid-cols-2 gap-2">
      <!--<div class="flex justify-between align-center w-full gap-2">-->
        <div class="flex flex-col align-center">
-         <span class="text-lime leading-0 font-bold">Lecturer:</span>
+         <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Lecturer:</span>
          <span class="text-white leading-tight" id="lecturer"></span>
        </div>
        
        <div class="flex flex-col align-center">
-         <span class="text-lime leading-0 font-bold">Date:</span>
+         <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Date:</span>
        <!--  <span class="text-white leading-tight">Thursday, 1st February, 2024</span>-->
                   <span class="text-white leading-tight" id="dateGre"></span>
+                  <span class="text-white leading-tight" id="dateIsl"></span>
 
        </div>
      <!--</div>-->
     <!-- <div class="mt-2 flex justify-between align-center w-full gap-2">-->
        <div class="mt-5 flex flex-col align-center">
-         <span class="text-lime leading-0 font-bold">Time:</span>
+         <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Time:</span>
          <span class="text-white leading-tight">04:30 pm - 6:30 pm</span>
        </div>
        
        <div class="mt-5 flex flex-col align-center">
-         <span class="text-lime leading-0 font-bold">Venue:</span>
+         <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Venue:</span>
          <span class="text-white leading-tight">Sagamu Central Mosque, Falawo</span>
        </div>
     <!-- </div>-->
@@ -153,56 +163,136 @@
     <button type="button" class="link-btn focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-xl tx-mont self-center" id="update">Edit</button>
   </div>
 
-  </div>
+</div>
+</div>
   
   </body>
 
 
 <script>
 
-function gregorianToHijri(gregorianYear, gregorianMonth, gregorianDay) {
-    gregorianMonth += 1; // Adjust months so February is the last one
-    if (gregorianMonth < 3) {
-        gregorianYear -= 1;
-        gregorianMonth += 12;
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("modal");
+    const temCon = document.getElementById("temCon");
+    const updateModal = document.getElementById("update");
+    const previewBtn = document.getElementById("preview");
+    const downloadBtn = document.getElementById("downloadFlyer");
+
+    // Setting up date input with Flatpickr
+    setMinDateAndRestrictToThursdays();
+
+    function showTemCon() {
+        modal.style.display = "none";
+        temCon.style.display = "block";
+        temCon.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
     }
 
-    let a = Math.floor(gregorianYear / 100);
-    let b = Math.floor(a / 4);
-    let c = 2 - a + b;
-    let e = Math.floor(365.25 * (gregorianYear + 4716));
-    let f = Math.floor(30.6001 * (gregorianMonth + 1));
-    let julianDay = c + gregorianDay + e + f - 1524.5;
-
-    let n = Math.floor((julianDay - 227015.1) / 354.367);
-    let islamicYear = n + 622;
-    let r = julianDay - (354.367 * n + 227015.1);
-    let islamicMonth = Math.floor((r + 0.5) / 29.531);
-    let islamicDay = Math.floor(r - 29.531 * islamicMonth + 0.5);
-
-    if (islamicDay === 0) {
-        islamicDay = 30;
-        islamicMonth -= 1;
-    }
-    if (islamicMonth === 0) {
-        islamicMonth = 12;
-        islamicYear -= 1;
+    function hideTemCon() {
+      modal.style.marginTop ="50%";
+        modal.style.display = "block";
+        temCon.style.display = "none";
+        temCon.classList.add("hidden");
+        document.body.style.overflow = "";
     }
 
-    // Format day and month for display
-    let formattedDay = islamicDay.toString().padStart(2, '0');
-    let formattedMonth = islamicMonth.toString().padStart(2, '0');
+    previewBtn.addEventListener("click", function () {
+        showTemCon();
+        updateTemplate();
+    });
 
-    return { year: islamicYear, month: formattedMonth, day: formattedDay };
+    downloadBtn.addEventListener("click", downloadFlyer);
+    updateModal.addEventListener("click", hideTemCon);
+
+    document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
+});
+
+function setMinDateAndRestrictToThursdays() {
+    flatpickr("#dateGreInput", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        enable: [function(date) { return date.getDay() === 4; }],
+        onChange: [convertToHijriAndDisplay]
+    });
 }
 
-document.getElementById('dateInput').addEventListener('change', function() {
-    let selectedDate = new Date(this.value);
-    let hijriDate = gregorianToHijri(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
+function updateTemplate() {
+    document.getElementById('topic').innerText = document.getElementById('topicInput').value;
+    document.getElementById('lecturer').innerText = document.getElementById('lecturerInput').value;
+    document.getElementById('dateGre').innerText = formatDate(document.getElementById('dateGreInput').value);
+}
 
-    // Displaying the converted Hijri date in Day-Month-Year format
-    document.getElementById('hijriDateDisplay').innerText = `Hijri Date: ${hijriDate.day}-${hijriDate.month}-${hijriDate.year}`;
-});
+function convertToHijriAndDisplay() {
+    const date = document.getElementById('dateGreInput').value;
+    if (date) {
+        fetchHijriDate(date, function(hijriDateString) {
+            document.getElementById('dateIsl').innerText = hijriDateString;
+        });
+    }
+}
+
+function fetchHijriDate(inputDate, callback) {
+    const [year, month, day] = inputDate.split('-');
+    const formattedDate = `${day}-${month}-${year}`;
+
+    fetch(`https://api.aladhan.com/v1/gToH/${formattedDate}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.data && data.data.hijri) {
+            const hijri = data.data.hijri;
+            callback(`${formatDayWithSuffix(hijri.day)} ${hijri.month.en} ${hijri.year}AH`);
+        }
+    })
+    .catch(error => console.error('Error fetching Hijri date:', error));
+}
+
+function formatDayWithSuffix(day) {
+    // Remove leading zeros by converting to integer then back to string
+    day = parseInt(day, 10).toString();
+    const lastDigit = parseInt(day.slice(-1), 10);
+    const exceptions = [11, 12, 13];
+    const dayInt = parseInt(day, 10);
+
+    // Check if the day is an exception; if not, determine the correct suffix
+    let suffix;
+    if (exceptions.includes(dayInt)) {
+        suffix = 'th';
+    } else {
+        switch (lastDigit) {
+            case 1: suffix = 'st'; break;
+            case 2: suffix = 'nd'; break;
+            case 3: suffix = 'rd'; break;
+            default: suffix = 'th';
+        }
+    }
+
+    return day + suffix;
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const options = { weekday: 'long', month: 'long', year: 'numeric' };
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    // Apply formatDayWithSuffix for the day part
+    const dayWithSuffix = formatDayWithSuffix(date.getDate());
+
+    // Constructing the formatted date string with the updated day part
+    const formattedDate = `${weekday}, ${month} ${dayWithSuffix}, ${year}`;
+    return formattedDate;
+}
+
+function downloadFlyer() {
+    html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "flyer.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
 
  /* function updateTemplate() {
       // Get user input
