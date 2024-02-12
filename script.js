@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
     updateModal.addEventListener("click", hideTemCon);
 
     document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
+    
+    document.getElementById('titleSelect').addEventListener('change', updateTemplate);
 });
 
 function setMinDateAndRestrictToThursdays() {
@@ -44,9 +46,11 @@ function setMinDateAndRestrictToThursdays() {
 }
 
 function updateTemplate() {
+  //const title = document.getElementById('titleSelect').value; // Get the selected title value
     document.getElementById('topic').innerText = document.getElementById('topicInput').value;
     document.getElementById('lecturer').innerText = document.getElementById('lecturerInput').value;
     document.getElementById('dateGre').innerText = formatDate(document.getElementById('dateGreInput').value);
+    document.getElementById('titlePort').innerText = document.getElementById('titleSelect').value;
 }
 
 function convertToHijriAndDisplay() {

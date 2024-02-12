@@ -53,18 +53,25 @@
     <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
       <label for="topicInput" class="block text-sm font-medium text-gray-700 my-2">Topic:</label>
-    <input type="text" id="topicInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
-     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Lecturer Details:</label>
-    <select class="ml-3 w-20 tx-2xl border-0 focus:outline-none focus:ring-0" name="" id="titleSelect" class="">
-                <option value="Mr." class="pl-2"><span class="mx-3 block"></span>Mr.</span></option>
+    <input type="text" id="topicInput" class="mt-1 p-2 outline-none border border-gray-300 rounded-lg w-full focus:outline-none focus:shadow" oninput="updateTemplate()">
+     <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2 mt-4">Lecturer Details:</label>
+  
+     <div class="w-full my-1">
+                       <label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Title:</label>                 <select id="titleSelect" style="font-size: 1.125rem; font-family: 'Montserrat', sans-serif;
+                                        font-weight: 500;"
+                                            class="py-2 px-4 border border-gray-300 rounded-lg w-full focus:outline-none focus:shadow text-lg tx-lg font-semibold text-black tracking-wider bg-white" onchange="updateTemplate()">
+                                            
+                             <option value="Mr." class="pl-2"><span class="mx-3 block"></span>Mr.</span></option>
                  <option value="Dr." class="pl-2"><span class="mx-3 block"></span>Dr.</span></option>
                   <option value="Mallam" class="pl-2"><span class="mx-3 block"></span>Mallam</span></option>
                    <option value="Ustaadh" class="pl-2"><span class="mx-3 block"></span>Ustaadh</span></option>
-                    <option value="Alh." class="pl-2"><span class="mx-3 block"></span>Alh.</span></option>
-  </select>
-     <input type="text" id="lecturerInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
+                    <option value="Alh." class="pl-2"><span class="mx-3 block"></span>Alh.</span></option>            
+                                        </select>
+                                    </div>
+                                    
+<label for="lecturerInput" class="block text-sm font-medium text-gray-700 my-2">Full Name:</label>     <input type="text" id="lecturerInput" class="mt-1 p-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:shadow" oninput="updateTemplate()">
  <label for="dateGreInput" class="block text-sm font-medium text-gray-700 my-2">Date:</label>
- <input type="date" id="dateGreInput" class="mt-1 p-2 border rounded-md w-full focus:outline-none" oninput="updateTemplate()">
+ <input type="date" id="dateGreInput" class="mt-1 p-2 w-full focus:outline-none focus:shadow border border-gray-300  rounded-lg" oninput="updateTemplate()">
  
  <div class="flex justify-between align-center ">
  
@@ -107,7 +114,10 @@
      <!--<div class="flex justify-between align-center w-full gap-2">-->
        <div class="flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Lecturer:</span>
-         <span class="text-white leading-tight" id="lecturer"></span>
+         <div class="flex align-center">
+           <span class="text-white leading-tight pr-1" id="titlePort"></span>
+         <span class="text-white leading-tight" id="lecturer">&nbsp;</span>
+         </div>
        </div>
        
        <div class="flex flex-col align-center">
@@ -205,6 +215,8 @@ document.addEventListener("DOMContentLoaded", function() {
     updateModal.addEventListener("click", hideTemCon);
 
     document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
+    
+    document.getElementById('titleSelect').addEventListener('change', updateTemplate);
 });
 
 function setMinDateAndRestrictToThursdays() {
@@ -217,9 +229,11 @@ function setMinDateAndRestrictToThursdays() {
 }
 
 function updateTemplate() {
+  //const title = document.getElementById('titleSelect').value; // Get the selected title value
     document.getElementById('topic').innerText = document.getElementById('topicInput').value;
     document.getElementById('lecturer').innerText = document.getElementById('lecturerInput').value;
     document.getElementById('dateGre').innerText = formatDate(document.getElementById('dateGreInput').value);
+    document.getElementById('titlePort').innerText = document.getElementById('titleSelect').value;
 }
 
 function convertToHijriAndDisplay() {
