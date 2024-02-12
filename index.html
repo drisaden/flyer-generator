@@ -14,6 +14,9 @@
         integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/npm/hijri-date@1.0.1/dist/hijri-date.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 
 <link rel="stylesheet" href="https://adenaikeidris.com.ng/assets/css/style.css">
  <link rel="icon" type="image/png" href="./mssn-logo.png">
@@ -155,136 +158,197 @@
 </div>
   
   </body>
+
 <script>
-  
-  function convertToHijri(gregorianDate) {
-  // Define the start date of the conversion in the Gregorian calendar
-  const startDate = new Date('2024-02-10');
-  // Hijri start date for calculation, beginning from Rajab since February 10, 2024, is 28 Rajab 1445
-  let hijriDay = 28;
-  let hijriMonthIndex = 7; // Rajab, considering 0 index based (Rajab is the 7th month in the given sequence starting from Muharram)
-  let hijriYear = 1445;
 
-  // Hijri months and their days, starting from Muharram
-  const hijriMonths = [
-    'Muharram', 'Safar', 'Rabi-ul-Awwal', 'Rabi-ul-Aakhir', 'Jumadal-uula', 'Jumadal-aakhirah',
-    'Rajab', 'Sha\'ban', 'Ramadan', 'Shawwal', 'Dhul-Qa\'dah', 'Dhul-hijjah'
-  ];
-  const hijriMonthDays = [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29];
-
-  // Calculate the difference in days between the given Gregorian date and the start date
-  const differenceInDays = Math.floor((gregorianDate - startDate) / (1000 * 60 * 60 * 24));
-
-  let totalDays = hijriDay + differenceInDays;
-
-  // Loop through each month to find the equivalent Hijri date
-  while (totalDays > hijriMonthDays[hijriMonthIndex]) {
-    totalDays -= hijriMonthDays[hijriMonthIndex];
-    hijriMonthIndex++;
-    // Adjust month index and increment year if needed
-    if (hijriMonthIndex > 11) {
-      hijriMonthIndex = 0; // Reset to Muharram
-      hijriYear++;
-    }
-  }
-
-  hijriDay = totalDays; // The remaining days give us the Hijri day
-
-  const hijriMonth = hijriMonths[hijriMonthIndex];
-
-  return `${hijriDay} ${hijriMonth}, ${hijriYear} A.H`;
-}
-  document.addEventListener('DOMContentLoaded', function() {
-  const dateInput = document.getElementById('dateInput');
-  const hijriDateDisplay = document.getElementById('hijriDateDisplay');
-
-  dateInput.addEventListener('change', function() {
-    const selectedDate = new Date(this.value);
-    const hijriDate = convertToHijri(selectedDate);
-    hijriDateDisplay.textContent = `Hijri Date: ${hijriDate}`;
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById('dateGreInput');
+    
+    // Set the minimum date to today
+    const today = new Date();
+    const minDate = formatDate(today);
+    dateInput.setAttribute('min', minDate);
+    
+    // Listener for date input changes
+    dateInput.addEventListener('change', function() {
+        const selectedDate = new Date(this.value);
+        
+        // Check if the selected date is a Thursday (getDay() returns 4 for Thursday)
+        if (selectedDate.getDay() !== 4) {
+            alert("Please select a Thursday.");
+            this.value = ''; // Reset the input
+        }
+    });
 });
 
+// Helper function to format date as YYYY-MM-DD
+/*function formatDate(date) {
+    const d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-
-// Example usage:
-const gregorianDate = new Date('2024-02-29'); // Convert February 29, 2024, to Hijri
-console.log(convertToHijri(gregorianDate)); // Should output the Hijri equivalent
-
-</script>
-
-<script>
-  function updateTemplate() {
-  // Get user input
-  const topic = document.getElementById('topicInput').value;
-  const lecturer = document.getElementById('lecturerInput').value;
-  const dateGre = document.getElementById('dateGreInput').value;
-
-  // Update template content in real-time
-  document.getElementById('topic').innerText = topic;
-  document.getElementById('lecturer').innerText = lecturer;
-  document.getElementById('dateGre').innerText = formatDate(dateGre);
-
-  // Update other dynamic content as needed
-}
-
-function formatDate(selectedDate) {
-  const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-  const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', options);
-  return formattedDate;
-}
+    return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
+}*/
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("modal");
-  const temCon = document.getElementById("temCon");
-  const updateModal = document.getElementById("update");
+    const modal = document.getElementById("modal");
+    const temCon = document.getElementById("temCon");
+    const updateModal = document.getElementById("update");
 
-  const previewBtn = document.getElementById("preview");
-  const downloadBtn = document.getElementById("downloadFlyer");
+    const previewBtn = document.getElementById("preview");
+    const downloadBtn = document.getElementById("downloadFlyer");
 
-  function showTemCon() {
-    modal.style.display = "none";
-    temCon.style.display = "block";
-    temCon.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-  }
+    // Set the minimum date to today and enforce Thursday selection
+    setMinDateAndRestrictToThursdays();
 
-  function hideTemCon() {
-    modal.style.marginTop = "50%";
-    modal.style.display = "block";
-    temCon.style.display = "none";
-    temCon.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
+    function showTemCon() {
+        modal.style.display = "none";
+        temCon.style.display = "block";
+        temCon.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+    }
 
-  function downloadFlyer() {
-    html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL();
-      link.download = "flyer.png";
-      link.click();
+    function hideTemCon() {
+        modal.style.marginTop = "50%";
+        modal.style.display = "block";
+        temCon.style.display = "none";
+        temCon.classList.add("hidden");
+        document.body.style.overflow = "";
+    }
+
+    function downloadFlyer() {
+        html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL();
+            link.download = "flyer.png";
+            link.click();
+        });
+    }
+
+    previewBtn.addEventListener("click", function () {
+        showTemCon();
+        updateTemplate();
     });
-  }
 
-  previewBtn.addEventListener("click", function () {
-    showTemCon();
-  });
+    downloadBtn.addEventListener("click", function () {
+        downloadFlyer();
+    });
 
-  downloadBtn.addEventListener("click", function () {
-    downloadFlyer();
-  });
+    updateModal.addEventListener("click", function () {
+        hideTemCon();
+        updateTemplate();
+    });
 
-  updateModal.addEventListener("click", function () {
-    hideTemCon();
-    updateTemplate();
-  });
+    document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
 });
 
-  
+/*document.addEventListener("DOMContentLoaded", function() {
+    setMinDateAndRestrictToThursdays();
+});*/
 
+function setMinDateAndRestrictToThursdays() {
+    const today = new Date();
+    let nextThursday = new Date();
+    if (today.getDay() !== 4) {
+        // Calculate next Thursday
+        nextThursday.setDate(today.getDate() + ((4 + 7 - today.getDay()) % 7));
+    }
 
+    flatpickr("#dateGreInput", {
+        minDate: nextThursday,
+        enable: [
+            function(date) {
+                // Enable only Thursdays
+                return date.getDay() === 4;
+            }
+        ],
+        dateFormat: "Y-m-d",
+        onChange: [function(selectedDates, dateStr, instance) {
+            convertToHijriAndDisplay();
+        }]
+    });
+}
 
+function updateTemplate() {
+    const topic = document.getElementById('topicInput').value;
+    const lecturer = document.getElementById('lecturerInput').value;
+    const dateGre = document.getElementById('dateGreInput').value;
+    
+    // Update template content in real-time
+    document.getElementById('topic').innerText = topic;
+    document.getElementById('lecturer').innerText = lecturer;
+    document.getElementById('dateGre').innerText = formatDate(dateGre);
+    
+    convertToHijriAndDisplay();
+}
+
+function convertToHijriAndDisplay() {
+    const dateGre = document.getElementById('dateGreInput').value;
+    if (dateGre) {
+        // Assuming the input format is YYYY-MM-DD, convert it to DD-MM-YYYY
+        const formattedDate = formatDateForAPI(dateGre);
+        fetchHijriDate(formattedDate, function(hijriDateString) {
+            document.getElementById('dateIsl').innerText = hijriDateString;
+        });
+    }
+}
+
+function formatDateForAPI(inputDate) {
+    // Convert date from YYYY-MM-DD to DD-MM-YYYY for the API request
+    const [year, month, day] = inputDate.split('-');
+    return `${day}-${month}-${year}`;
+}
+
+function fetchHijriDate(date, callback) {
+    const url = `https://api.aladhan.com/v1/gToH/${date}`;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        if (data.data && data.data.hijri) {
+            const hijri = data.data.hijri;
+            // Format the day with the appropriate suffix
+            const dayWithSuffix = formatDayWithSuffix(hijri.day);
+            const hijriDateString = `${dayWithSuffix} ${hijri.month.en} ${hijri.year}AH`;
+            callback(hijriDateString);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching Hijri date:', error);
+    });
+}
+
+function formatDayWithSuffix(day) {
+    const lastDigit = day % 10;
+    let suffix = 'th';
+
+    // Adjusting for special cases
+    if (day !== 11 && day !== 12 && day !== 13) {
+        switch (lastDigit) {
+            case 1: suffix = 'st'; break;
+            case 2: suffix = 'nd'; break;
+            case 3: suffix = 'rd'; break;
+        }
+    }
+
+    return `${day}${suffix}`;
+}
+
+function formatDate(selectedDate) {
+  const date = new Date(selectedDate);
+    const options = { weekday: 'long', month: 'long', year: 'numeric' };
+    // Extracting parts of the date
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    const dayWithSuffix = formatDayWithSuffix(date.getDate());
+
+    // Constructing the formatted date string
+    const formattedDate = `${weekday}, ${month} ${dayWithSuffix}, ${year}`;
+    return formattedDate;
+}
 
 </script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
