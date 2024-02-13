@@ -298,6 +298,18 @@ function formatDate(dateStr) {
 }
 
 function downloadFlyer() {
+    // Ensure images are loaded
+    document.images.forEach(function(img) {
+        img.onload = function() {
+            renderFlyer();
+        };
+    });
+
+    // You might need to explicitly wait for all images to load here
+    renderFlyer();
+}
+
+function renderFlyer() {
     const container = document.getElementById("templateContainer");
 
     // Calculate the dimensions of the container
@@ -325,6 +337,7 @@ function downloadFlyer() {
         console.log("Error capturing the flyer:", error);
     });
 }
+
 
 /*function renderFlyer() {
     html2canvas(document.getElementById("templateContainer"), {
