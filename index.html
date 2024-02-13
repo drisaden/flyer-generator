@@ -291,32 +291,14 @@ function formatDate(dateStr) {
 }
 
 function downloadFlyer() {
-const container = document.getElementById("templateContainer");
-
-    // Calculate the dimensions of the container
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-
-    html2canvas(container, {
-        scale: 1, // Adjust scale as needed for better quality or performance
-        logging: true, // Enable logging for debugging
-        useCORS: true, // For loading images from external origins
-        windowWidth: containerWidth,
-        windowHeight: containerHeight,
-        scrollX: 0,
-        scrollY: 0,
-        x: container.offsetLeft, // Adjust x, y coordinates if necessary to start capturing from the exact position of the container
-        y: container.offsetTop
-    }).then(function (canvas) {
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "flyer.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }).catch(function (error) {
-        console.log("Error capturing the flyer:", error);
-    });
+  html2canvas(document.getElementById("templateContainer")).then(function(
+    canvas
+  ) {
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL();
+    link.download = "flyer.png";
+    link.click();
+  });
 }
 
 </script>
