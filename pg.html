@@ -48,7 +48,7 @@
 
 <body>
 
-     <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
+      <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
   
     <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
@@ -83,12 +83,12 @@
  
   
   <div id="temCon" class="hidden">
-  <div id="templateContainer" style="width:3200px; height:3200px;" class="relative">
+  <div id="templateContainer" style="width:125%; height: 125%" class="relative">
      <div>
      
    
    <!--<div class="bg-contain bg-center bg-no-repeat" style="background: url('./bg.jpg');">-->
-     <div class="h-full relative">
+     <div class="relative">
        
   
      <img src="./bg.jpg" alt="" class="absolute h-full bg-white w-full bg-gradient-to-t from-white to-transparent z-10">
@@ -114,9 +114,9 @@
      <!--<div class="flex justify-between align-center w-full gap-2">-->
        <div class="flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Lecturer:</span>
-         <div class="flex align-center">
-           <span class="text-white leading-tight pr-1" id="titlePort"></span>
-         <span class="text-white leading-tight" id="lecturer">&nbsp;</span>
+         <div class="text-white leading-tight">
+           <span class="pr-1" id="titlePort"></span>
+         <span id="lecturer"></span>
          </div>
        </div>
        
@@ -141,7 +141,7 @@
     <!-- </div>-->
 
    </div>
-   <div class="flex mx-auto justify-center gap-3 px-10 py-5 bg-white align-center text-green-800 text-sm">
+   <div class="flex mx-auto justify-center gap-3 px-10 mt-0 py-3 bg-white align-center text-green-800 text-sm">
      <div class="flex gap-1 align-center">
        <div>
          <i class="fab fa-instagram"></i>
@@ -298,18 +298,35 @@ function formatDate(dateStr) {
 }
 
 function downloadFlyer() {
-    // Ensure images are loaded
-    document.images.forEach(function(img) {
-        img.onload = function() {
-            renderFlyer();
-        };
-    });
+    const container = document.getElementById("templateContainer");
 
-    // You might need to explicitly wait for all images to load here
-    renderFlyer();
+    // Calculate the dimensions of the container
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+
+    html2canvas(container, {
+        scale: 1, // Adjust scale as needed for better quality or performance
+        logging: true, // Enable logging for debugging
+        useCORS: true, // For loading images from external origins
+        windowWidth: containerWidth,
+        windowHeight: containerHeight,
+        scrollX: 0,
+        scrollY: 0,
+        x: container.offsetLeft, // Adjust x, y coordinates if necessary to start capturing from the exact position of the container
+        y: container.offsetTop
+    }).then(function (canvas) {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "flyer.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }).catch(function (error) {
+        console.log("Error capturing the flyer:", error);
+    });
 }
 
-function renderFlyer() {
+/*function renderFlyer() {
     html2canvas(document.getElementById("templateContainer"), {
         scale: 1, // Adjust scale as needed
         logging: true,
@@ -326,7 +343,7 @@ function renderFlyer() {
         link.click();
         document.body.removeChild(link);
     });
-}
+}*/
 
 
  /* function updateTemplate() {
