@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head id="head-section">
@@ -20,32 +19,16 @@
 
 <link rel="stylesheet" href="https://adenaikeidris.com.ng/assets/css/style.css">
  <link rel="icon" type="image/png" href="./mssn-logo.png">
+ <link rel="stylesheet" href="css/style.css">
 
 </head>
 <style>
-  .leading-0{
-    line-height: 0.85;
-  }
-  .border-lime{
-    border-color: #90FF27;
-  }
-  .text-lime{
-    color: #90FF27;
-  }
-   .text-shadow{
-    text-shadow: 5px .4px gray;
-    color: #90FF27;
-  }
-  .z-9999{
-    z-index: 9999;
-  }
-  .z-10{
-    z-index: -10;
-  }
+
 </style>
 
 <body>
-        <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
+
+      <main id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-100  flex flex-col items-center justify-center z-9999">
   
     <div class="bg-white p-8 rounded shadow-md max-w-md w-11/12 mx-auto">
         
@@ -78,67 +61,69 @@
   </div>
   </main>
  
-  
   <div id="temCon" class="hidden">
-  <div id="templateContainer" style="width:125%; height: 125%" class="relative">
+  <div id="templateContainer" style="width:125%;" class="relative">
      <div>
      
    
    <!--<div class="bg-contain bg-center bg-no-repeat" style="background: url('./bg.jpg');">-->
-     <div class="relative">
+     <div class="relative" style="height: 100%">
        
   
-     <img src="./bg.jpg" alt="" class="absolute h-full bg-white w-full bg-gradient-to-t from-white to-transparent z-10">
+     <img src="./bg.jpg" alt="" class="absolute h-full bg-white w-full bg-gradient-to-t from-white to-transparent z-10" style="height: 470px">
      
      <div class="flex flex-col gap-1 justify-between">
        <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-5">
        <img src="./mssn-logo.png" alt="" class="w-full h-full rounded-full p-2">
        </div>
-       <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
+       <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm bold-text text-gray-700">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
      </div>
-     <div class="flex flex-col gap-1 justify-between text-center">
-       <span class="font-light text-gray-700 capitalize mt-5">Presents</span>
-       <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black" style="line-height: 0.85;">WEEKLY <br>USRAH</h1>
+     <div class="flex flex-col gap-1 justify-between align-center text-center">
+       <p class="font-light text-gray-700 capitalize mt-5 light-text">Presents</p>
+       <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black -mt-10 black-text" style="line-height: 0.85;">WEEKLY <br>USRAH</h1>
      </div>
-     <div class="bg-green-800 p-2 flex gap-2 rounded-b-md w-3/4 mx-auto text-white font-bold">
-       <span class="self-center bg-red-500 p-1 rounded-sm">
+     <div class="bg-green-800 p-2 flex align-center gap-2 rounded-b-md mt-10 w-3/4 mx-auto text-white font-bold bold-text">
+       <p class="self-center bg-red-500 pb-3 px-1 -pt-1 rounded-sm">
          Topic:
-       </span>
-      <span class="block text-1eft self-center leading-tight" id="topic"></span>
+       </p>
+      <p class="block text-1eft self-center leading-tight pb-3" id="topic"></p>
      </div>
    </div>
-   <div class="mt-2 border-t-4 border-lime bg-green-800 px-10 py-5 w-full grid grid-cols-2 gap-2">
+   <div class="w-full mx-auto mt-2 border-t-4 border-lime bg-green-800">
+   <div class="mt-2 py-5 w-9/12 mx-auto grid grid-cols-2 gap-2">
      <!--<div class="flex justify-between align-center w-full gap-2">-->
        <div class="flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Lecturer:</span>
          <div class="text-white leading-tight">
-           <span class="pr-1" id="titlePort"></span>
-         <span id="lecturer"></span>
+           <span class="pr-0.5  text-sm letspace-1" id="titlePort"></span>
+         <span id="lecturer" class=" text-sm letspace-1"></span>
          </div>
        </div>
        
        <div class="flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Date:</span>
        <!--  <span class="text-white leading-tight">Thursday, 1st February, 2024</span>-->
-                  <span class="text-white leading-tight" id="dateGre"></span>
-                  <span class="text-white leading-tight" id="dateIsl"></span>
+                  <span class="text-white leading-tight text-sm letspace-1" id="dateGre"></span>
+                  <span class="text-white leading-tight text-sm letspace-1" id="dateIsl"></span>
 
        </div>
      <!--</div>-->
     <!-- <div class="mt-2 flex justify-between align-center w-full gap-2">-->
        <div class="mt-5 flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Time:</span>
-         <span class="text-white leading-tight">04:30 pm - 6:30 pm</span>
+         <span class="text-white leading-tight text-sm letspace-1">04:30 pm - 6:30 pm</span>
        </div>
        
        <div class="mt-5 flex flex-col align-center">
          <span class="text-lime leading-0 font-bold" style="line-height: 0.85;">Venue:</span>
-         <span class="text-white leading-tight">Sagamu Central Mosque, Falawo</span>
+         <span class="text-white leading-tight text-sm letspace-1">Sagamu Central Mosque, Falawo</span>
        </div>
     <!-- </div>-->
 
    </div>
-   <div class="flex mx-auto justify-center gap-3 px-10 mt-0 py-3 bg-white align-center text-green-800 text-sm">
+</div>
+
+   <div class="flex mx-auto justify-center gap-3 px-10 mt-0 mb-3 pb-3 -pt-2 bg-white align-center text-green-800 text-sm">
      <div class="flex gap-1 align-center">
        <div>
          <i class="fab fa-instagram"></i>
@@ -152,158 +137,31 @@
         <div>
         <i class="fab fa-whatsapp"></i>
         </div>
-        <p class="self-center">+234 708 050 8894</p>
+        <p class="self-center letspace-1">+234 708 050 8894</p>
       </div>
    </div>
      
    </div>
     
    </div>
-   <div class="flex justify-evenly align-center mt-10 items-center w-full">
+  
+  <section>
+  <div class="flex justify-evenly align-center mt-10 items-center w-full">
      
-     <div>
-       
-    
-   <button type="button" class="bg-diamond-2 text-white px-4 py-2 rounded-md text-xl" id="downloadFlyer">Download Flyer</button>
+  <div>
+    <button type="button" class="bg-diamond-2 text-white px-4 py-2 rounded-md text-xl" id="downloadFlyer">Download Flyer</button>
    </div>
    <div class="self-center">
     <button type="button" class="link-btn focus:outline-none focus:ring-0 block tx-diamond  font-semibold md:font-medium relative leading-none text-xl tx-mont self-center" id="update">Edit</button>
   </div>
-
 </div>
+ <p class="leading-loose py-5 text-sm font-light w-3/4 md:w-2/4 mx-auto text-gray-700"><span class="font-bold">NOTE:</span> You don't need to worry about the images and text being out-of-place. The downloaded image will be corrected authmatically. Make sure your details are correct before clicking Download </p>
+</section>
 </div>
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("modal");
-    const temCon = document.getElementById("temCon");
-    const updateModal = document.getElementById("update");
-    const previewBtn = document.getElementById("preview");
-    const downloadBtn = document.getElementById("downloadFlyer");
 
-    // Setting up date input with Flatpickr
-    setMinDateAndRestrictToThursdays();
 
-    function showTemCon() {
-        modal.style.display = "none";
-        temCon.style.display = "block";
-        temCon.classList.remove("hidden");
-        document.body.style.overflow = "hidden";
-    }
-
-    function hideTemCon() {
-      modal.style.marginTop ="50%";
-        modal.style.display = "block";
-        temCon.style.display = "none";
-        temCon.classList.add("hidden");
-        document.body.style.overflow = "";
-    }
-
-    previewBtn.addEventListener("click", function () {
-        showTemCon();
-        updateTemplate();
-    });
-
-    downloadBtn.addEventListener("click", downloadFlyer);
-    updateModal.addEventListener("click", hideTemCon);
-
-    document.getElementById('dateGreInput').addEventListener('change', convertToHijriAndDisplay);
-    
-    document.getElementById('titleSelect').addEventListener('change', updateTemplate);
-});
-
-function setMinDateAndRestrictToThursdays() {
-    flatpickr("#dateGreInput", {
-        minDate: "today",
-        dateFormat: "Y-m-d",
-        enable: [function(date) { return date.getDay() === 4; }],
-        onChange: [convertToHijriAndDisplay]
-    });
-}
-
-function updateTemplate() {
-  //const title = document.getElementById('titleSelect').value; // Get the selected title value
-    document.getElementById('topic').innerText = document.getElementById('topicInput').value;
-    document.getElementById('lecturer').innerText = document.getElementById('lecturerInput').value;
-    document.getElementById('dateGre').innerText = formatDate(document.getElementById('dateGreInput').value);
-    document.getElementById('titlePort').innerText = document.getElementById('titleSelect').value;
-}
-
-function convertToHijriAndDisplay() {
-    const date = document.getElementById('dateGreInput').value;
-    if (date) {
-        fetchHijriDate(date, function(hijriDateString) {
-            document.getElementById('dateIsl').innerText = hijriDateString;
-        });
-    }
-}
-
-function fetchHijriDate(inputDate, callback) {
-    const [year, month, day] = inputDate.split('-');
-    const formattedDate = `${day}-${month}-${year}`;
-
-    fetch(`https://api.aladhan.com/v1/gToH/${formattedDate}`)
-    .then(response => response.json())
-    .then(data => {
-        if (data.data && data.data.hijri) {
-            const hijri = data.data.hijri;
-            callback(`${formatDayWithSuffix(hijri.day)} ${hijri.month.en} ${hijri.year}AH`);
-        }
-    })
-    .catch(error => console.error('Error fetching Hijri date:', error));
-}
-
-function formatDayWithSuffix(day) {
-    // Remove leading zeros by converting to integer then back to string
-    day = parseInt(day, 10).toString();
-    const lastDigit = parseInt(day.slice(-1), 10);
-    const exceptions = [11, 12, 13];
-    const dayInt = parseInt(day, 10);
-
-    // Check if the day is an exception; if not, determine the correct suffix
-    let suffix;
-    if (exceptions.includes(dayInt)) {
-        suffix = 'th';
-    } else {
-        switch (lastDigit) {
-            case 1: suffix = 'st'; break;
-            case 2: suffix = 'nd'; break;
-            case 3: suffix = 'rd'; break;
-            default: suffix = 'th';
-        }
-    }
-
-    return day + suffix;
-}
-
-function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    const options = { weekday: 'long', month: 'long', year: 'numeric' };
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const month = date.toLocaleDateString('en-US', { month: 'long' });
-    const year = date.getFullYear();
-    // Apply formatDayWithSuffix for the day part
-    const dayWithSuffix = formatDayWithSuffix(date.getDate());
-
-    // Constructing the formatted date string with the updated day part
-    const formattedDate = `${weekday}, ${month} ${dayWithSuffix}, ${year}`;
-    return formattedDate;
-}
-
-function downloadFlyer() {
-  html2canvas(document.getElementById("templateContainer")).then(function(
-    canvas
-  ) {
-    const link = document.createElement("a");
-    link.href = canvas.toDataURL();
-    link.download = "flyer.png";
-    link.click();
-  });
-}
-
-</script>
-  </body>
-  
- <!-- <script src="./script.js"></script>-->
+<script src="./script.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+</body>
 </html>

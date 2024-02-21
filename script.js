@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modal");
     const temCon = document.getElementById("temCon");
@@ -115,12 +116,12 @@ function formatDate(dateStr) {
 }
 
 function downloadFlyer() {
-    html2canvas(document.getElementById("templateContainer")).then(function (canvas) {
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/svg");
-        link.download = "flyer.svg";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    html2canvas(document.getElementById("templateContainer")).then(function (
+      canvas
+    ) {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL();
+      link.download = "flyer.png";
+      link.click();
     });
 }

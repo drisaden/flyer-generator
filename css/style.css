@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Regular.woff2') format('woff2'),
+         url('fonts/Trap-Regular.woff') format('woff');
+    font-weight: 400; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-SemiBold.woff2') format('woff2'),
+         url('fonts/Trap-SemiBold.woff') format('woff');
+    font-weight: 600; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Bold.woff2') format('woff2'),
+         url('fonts/Trap-Bold.woff') format('woff');
+    font-weight: 700; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Black.woff2') format('woff2'),
+         url('fonts/Trap-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-ExtraBold.woff2') format('woff2'),
+         url('fonts/Trap-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Light.woff2') format('woff2'),
+         url('fonts/Trap-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Medium.woff2') format('woff2'),
+         url('fonts/Trap-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+:root {
+    /* Font Family */
+    --font-family-trap: 'Trap', sans-serif;
+
+    /* Font Weights */
+    --f-weight-regular: 400;
+    --f-weight-medium: 500;
+    --f-weight-semibold: 600;
+    --f-weight-bold: 700;
+    --f-weight-extrabold: 800;
+    --f-weight-black: 900;
+    --f-weight-light: 300;
+}
+
+body {
+    font-family: var(--font-family-trap);
+}
+
+.regular-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-regular);
+}
+
+.medium-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-medium);
+}
+
+.semibold-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-semibold);
+}
+
+.bold-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-bold);
+}
+
+.extrabold-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-extrabold);
+}
+
+.black-text {
+  /* font-family: var(--font-family-trap); */
+    font-weight: var(--f-weight-black);
+}
+
+.light-text {
+    font-weight: var(--f-weight-light);
+}
+
+
+
+  .leading-0{
+    line-height: 0.85;
+  }
+  .letspace-1{
+    letter-spacing: -0.8px;
+  }
+  .border-lime{
+    border-color: #c2db02;
+  }
+  .text-lime{
+    color: #c2db02;
+  }
+   .text-shadow{
+    text-shadow: 5px .4px gray;
+    color: #c2db02;
+  }
+  .z-9999{
+    z-index: 9999;
+  }
+  .z-10{
+    z-index: -10;
+  }
