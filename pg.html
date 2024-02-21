@@ -22,6 +22,116 @@
 
 </head>
 <style>
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Regular.woff2') format('woff2'),
+         url('fonts/Trap-Regular.woff') format('woff');
+    font-weight: 400; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-SemiBold.woff2') format('woff2'),
+         url('fonts/Trap-SemiBold.woff') format('woff');
+    font-weight: 600; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Bold.woff2') format('woff2'),
+         url('fonts/Trap-Bold.woff') format('woff');
+    font-weight: 700; 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Black.woff2') format('woff2'),
+         url('fonts/Trap-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-ExtraBold.woff2') format('woff2'),
+         url('fonts/Trap-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Light.woff2') format('woff2'),
+         url('fonts/Trap-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Trap';
+    src: url('fonts/Trap-Medium.woff2') format('woff2'),
+         url('fonts/Trap-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+:root {
+    /* Font Family */
+    --font-family-trap: 'Trap', sans-serif;
+
+    /* Font Weights */
+    --f-weight-regular: 400;
+    --f-weight-medium: 500;
+    --f-weight-semibold: 600;
+    --f-weight-bold: 700;
+    --f-weight-extrabold: 800;
+    --f-weight-black: 900;
+    --f-weight-light: 300;
+}
+
+/* body {
+    font-family: var(--font-family-trap);
+} */
+
+.regular-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-regular);
+}
+
+.medium-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-medium);
+}
+
+.semibold-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-semibold);
+}
+
+.bold-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-bold);
+}
+
+.extrabold-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-extrabold);
+}
+
+.black-text {
+  font-family: var(--font-family-trap);
+    font-weight: var(--f-weight-black);
+}
+
+.light-text {
+    font-weight: var(--f-weight-light);
+}
+
+
+
   .leading-0{
     line-height: 0.85;
   }
@@ -141,13 +251,13 @@
        <div class="border-1 border-gray-800 bg-transparent rounded-full w-16 h-16 mx-auto mt-5">
        <img src="./mssn-logo.png" alt="" class="w-full h-full rounded-full p-2">
        </div>
-       <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
+       <span class="uppercase font-bold leading-tight tracking-widest text-center text-sm bold-text text-gray-700">MUSLIM STUDENTS' SOCIETY OF NIGERIA <br>REMO AREA COUNCIL</span>
      </div>
      <div class="flex flex-col gap-1 justify-between align-center text-center">
-       <p class="font-light text-gray-700 capitalize mt-5">Presents</p>
+       <p class="font-light text-gray-700 capitalize mt-5 light-text">Presents</p>
        <h1 class="text-8xl leading-0 tracking-widest text-shadow font-black -mt-10" style="line-height: 0.85;">WEEKLY <br>USRAH</h1>
      </div>
-     <div class="bg-green-800 p-2 flex align-center gap-2 rounded-b-md mt-10 w-3/4 mx-auto text-white font-bold">
+     <div class="bg-green-800 p-2 flex align-center gap-2 rounded-b-md mt-10 w-3/4 mx-auto text-white font-bold bold-text">
        <p class="self-center bg-red-500 pb-3 px-1 rounded-sm">
          Topic:
        </p>
