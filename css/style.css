@@ -1,55 +1,55 @@
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-Regular.woff2') format('woff2'),
-         url('fonts/Trap-Regular.woff') format('woff');
+    src: url('../fonts/Trap-Regular.woff2') format('woff2'),
+         url('../fonts/Trap-Regular.woff') format('woff');
     font-weight: 400; 
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-SemiBold.woff2') format('woff2'),
-         url('fonts/Trap-SemiBold.woff') format('woff');
+    src: url('../fonts/Trap-SemiBold.woff2') format('woff2'),
+         url('../fonts/Trap-SemiBold.woff') format('woff');
     font-weight: 600; 
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-Bold.woff2') format('woff2'),
-         url('fonts/Trap-Bold.woff') format('woff');
+    src: url('../fonts/Trap-Bold.woff2') format('woff2'),
+         url('../fonts/Trap-Bold.woff') format('woff');
     font-weight: 700; 
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-Black.woff2') format('woff2'),
-         url('fonts/Trap-Black.woff') format('woff');
+    src: url('../fonts/Trap-Black.woff2') format('woff2'),
+         url('../fonts/Trap-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-ExtraBold.woff2') format('woff2'),
-         url('fonts/Trap-ExtraBold.woff') format('woff');
+    src: url('../fonts/Trap-ExtraBold.woff2') format('woff2'),
+         url('../fonts/Trap-ExtraBold.woff') format('woff');
     font-weight: 800;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-Light.woff2') format('woff2'),
-         url('fonts/Trap-Light.woff') format('woff');
+    src: url('../fonts/Trap-Light.woff2') format('woff2'),
+         url('../fonts/Trap-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Trap';
-    src: url('fonts/Trap-Medium.woff2') format('woff2'),
-         url('fonts/Trap-Medium.woff') format('woff');
+    src: url('../fonts/Trap-Medium.woff2') format('woff2'),
+         url('../fonts/Trap-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
 }
